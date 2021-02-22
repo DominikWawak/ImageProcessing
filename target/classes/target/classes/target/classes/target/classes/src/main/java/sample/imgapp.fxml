@@ -19,9 +19,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="772.0">
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1230.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -44,37 +44,40 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane fx:id="tabPane" layoutY="27.0" prefHeight="474.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutY="27.0" prefHeight="815.0" prefWidth="1230.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tab1" text="Tab 1">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="995.0">
                      <children>
-                        <ScrollPane layoutX="10.0" layoutY="15.0" prefHeight="393.0" prefWidth="532.0">
+                        <ScrollPane layoutX="10.0" layoutY="15.0" prefHeight="767.0" prefWidth="985.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="612.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="974.0">
                                  <children>
-                                    <ImageView fx:id="mainImage" fitHeight="474.0" fitWidth="617.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="mainImage" fitHeight="744.0" fitWidth="967.0" layoutX="2.0" onMouseClicked="#getRGB" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Separator layoutX="547.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="440.0" prefWidth="14.0" />
-                        <ToggleButton fx:id="grayScaleBTN" layoutX="603.0" layoutY="61.0" mnemonicParsing="false" onAction="#toggleGrayScale" style="-fx-background-color: gray;" text="ToggleButton" />
-                        <Slider fx:id="brightnessSlider" blockIncrement="0.01" layoutX="585.0" layoutY="129.0" max="1.0" min="-1.0" />
-                        <Slider fx:id="hueSlider" blockIncrement="0.01" layoutX="585.0" layoutY="178.0" max="1.0" min="-1.0" />
-                        <Slider fx:id="saturationSlider" blockIncrement="0.01" layoutX="585.0" layoutY="231.0" max="1.0" min="-1.0" />
-                        <Label layoutX="634.0" layoutY="106.0" text="Brightness" />
-                        <Label layoutX="634.0" layoutY="154.0" text="HUE" />
-                        <Label layoutX="627.0" layoutY="211.0" text="Saturation" />
-                        <Label fx:id="fname" layoutX="566.0" layoutY="335.0" prefHeight="17.0" prefWidth="195.0" text="File Name" />
-                        <Label fx:id="fsize" layoutX="566.0" layoutY="357.0" prefHeight="17.0" prefWidth="199.0" text="File Size" />
-                        <Label fx:id="fdimensions" layoutX="565.0" layoutY="386.0" text="dimensions" />
-                        <Label layoutX="641.0" layoutY="19.0" prefHeight="17.0" prefWidth="54.0" text="EDIT" />
-                        <Slider fx:id="zoomSlider" blockIncrement="1.0" layoutX="174.0" layoutY="409.0" max="4.0" min="-4.0" />
-                        <TextField fx:id="width" layoutX="634.0" layoutY="382.0" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: skyblue;" />
-                        <TextField fx:id="height" layoutX="699.0" layoutY="382.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: salmon;" />
-                        <Button fx:id="applyResizeBtn" layoutX="634.0" layoutY="411.0" mnemonicParsing="false" onAction="#applyResize" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: lightgreen;" text="Apply" />
+                        <Separator layoutX="998.0" layoutY="1.0" orientation="VERTICAL" prefHeight="788.0" prefWidth="14.0" />
+                        <ToggleButton fx:id="grayScaleBTN" layoutX="1062.0" layoutY="83.0" mnemonicParsing="false" onAction="#toggleGrayScale" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: gray;" text="GrayScale" />
+                        <Slider fx:id="brightnessSlider" blockIncrement="0.01" layoutX="1036.0" layoutY="131.0" max="1.0" min="-1.0" />
+                        <Slider fx:id="hueSlider" blockIncrement="0.01" layoutX="1036.0" layoutY="180.0" max="1.0" min="-1.0" />
+                        <Slider fx:id="saturationSlider" blockIncrement="0.01" layoutX="1036.0" layoutY="233.0" max="1.0" min="-1.0" />
+                        <Label layoutX="1085.0" layoutY="108.0" text="Brightness" />
+                        <Label layoutX="1085.0" layoutY="156.0" text="HUE" />
+                        <Label layoutX="1078.0" layoutY="213.0" text="Saturation" />
+                        <Label fx:id="fname" layoutX="1017.0" layoutY="337.0" prefHeight="17.0" prefWidth="195.0" text="File Name" />
+                        <Label fx:id="fsize" layoutX="1017.0" layoutY="359.0" prefHeight="17.0" prefWidth="199.0" text="File Size" />
+                        <Label fx:id="fdimensions" layoutX="1016.0" layoutY="388.0" text="dimensions" />
+                        <Label layoutX="1079.0" layoutY="7.0" prefHeight="17.0" prefWidth="54.0" text="EDIT" />
+                        <Slider fx:id="zoomSlider" blockIncrement="1.0" layoutX="1010.0" layoutY="582.0" max="4.0" min="-4.0" orientation="VERTICAL" />
+                        <TextField fx:id="width" layoutX="1034.0" layoutY="423.0" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: skyblue;" />
+                        <TextField fx:id="height" layoutX="1099.0" layoutY="423.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: salmon;" />
+                        <Button fx:id="applyResizeBtn" layoutX="1034.0" layoutY="452.0" mnemonicParsing="false" onAction="#applyResize" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: lightgreen;" text="Apply" />
+                        <ToggleButton fx:id="blackAndWhite" layoutX="1062.0" layoutY="42.0" mnemonicParsing="false" onAction="#blackAndWhiteToggle" text="Black and white" />
+                        <Label fx:id="hueLab" layoutX="1149.0" layoutY="205.0" text="Label" />
+                        <Label fx:id="satLab" layoutX="1149.0" layoutY="256.0" text="Label" />
                      </children>
                   </AnchorPane>
             </content>
@@ -89,8 +92,8 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="248.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="209.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="359.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="402.0" minHeight="0.0" prefHeight="321.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <ImageView fx:id="redImg" fitHeight="211.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" />

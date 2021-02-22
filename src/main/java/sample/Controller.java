@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -32,11 +33,11 @@ public class Controller implements Initializable {
     private MenuItem rgbChannels,closeBTN,saveBTN,newTabBtn;
 
     @FXML
-    private ImageView mainImage,redImg,blueImg,greenImg,ogImg;
+    private ImageView mainImage,redImg,blueImg,greenImg,ogImg,blackAndWhiteIMG;
 
 
     @FXML
-    private ToggleButton grayScaleBTN;
+    private ToggleButton grayScaleBTN, blackAndWhite;
 
     @FXML
     private Button applyZoomBTN;
@@ -60,7 +61,7 @@ public class Controller implements Initializable {
     private Label fsize;
 
     @FXML
-    private Label fdimensions;
+    private Label fdimensions, hueLab,satLab;
     @FXML
     private TextField width;
 
@@ -77,6 +78,8 @@ public class Controller implements Initializable {
     @FXML
     private TabPane tabPane;
 
+    @FXML
+    private ChoiceBox<String> colorChoice;
 
 
     private Image image;
@@ -88,8 +91,13 @@ public class Controller implements Initializable {
 
         template=tab1;
 
+        colorChoice.getItems().add("red");
+        colorChoice.getItems().add("orange");
+        colorChoice.getItems().add("blue");
+
         zoomSlider.valueProperty().addListener((ov,old_val,new_val) -> {
             mainImage.setScaleX(new_val.doubleValue());
+
            mainImage.setScaleY(new_val.doubleValue());
 
          });
@@ -105,14 +113,17 @@ public class Controller implements Initializable {
 
             colorAdjust.setHue(new_val.doubleValue());
             mainImage.setEffect(colorAdjust);
+           hueLab.setText(hueSlider.getValue()+"");
 
         });
         saturationSlider.valueProperty().addListener((ov,old_val,new_val) -> {
 
             colorAdjust.setSaturation(new_val.doubleValue());
             mainImage.setEffect(colorAdjust);
+            satLab.setText(saturationSlider.getValue()+"");
 
         });
+
 
 
         saveBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -236,6 +247,58 @@ public class Controller implements Initializable {
 
     }
 
+    public Image makeBlackAndWhite(Image original ,String color){
+
+
+        PixelReader pixelReader = original.getPixelReader();
+
+        int width = (int) original.getWidth();
+        int height = (int) original.getHeight();
+        WritableImage bwImage = new WritableImage(width,height);
+        PixelWriter pixelWriter = bwImage.getPixelWriter();
+
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int pixel = pixelReader.getArgb(x, y);
+
+                Color og = pixelReader.getColor(x,y);
+                double valueOfColour = og.getRed()+og.getBlue()+og.getGreen();
+                Color borW;
+                switch (color) {
+                    // FOR ORANGE
+                    case "orange":
+                    borW = (og.getHue() <= 45 && og.getSaturation() > 0.95) ? Color.WHITE : Color.BLACK;
+                        break;
+                    //blue
+                    case "blue":
+                    borW = (og.getHue() <= 206 && og.getHue() >= 195 && og.getSaturation() <= 0.4) ? Color.WHITE : Color.BLACK;
+                        break;
+                    //cherries
+                    case "red": 
+                        borW = (og.getHue() <= 360 && og.getHue() >= 345 && og.getSaturation() > 0.85) ? Color.WHITE : Color.BLACK;
+                            break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + color);
+                }
+                pixelWriter.setColor(x,y,borW);
+
+                blackAndWhiteIMG.setImage(bwImage);
+               // System.out.println(pixel);
+
+            }
+        }
+
+
+
+        return original;
+    }
+
+
+//    public boolean interpretColour(Color cl){
+//
+//    }
+
     @FXML
     void applyResize(ActionEvent event) {
                 mainImage.setFitWidth(Double.parseDouble(width.getText()));
@@ -256,6 +319,27 @@ public class Controller implements Initializable {
       height.setText(null);
 
 
+    }
+
+//    public void showPixelDetail(MouseEvent mouseEvent) {
+//        mainImage.setOnMousePressed(e->	{
+//            Color c=mainImage.getImage().getPixelReader().getColor(mouseEvent.getX(), ((int) mouseEvent.getY()));
+//            System.out.println("\nHue: "+c.getHue());
+//            System.out.println("Saturation: "+c.getSaturation());
+//            System.out.println("Brightness: "+c.getBrightness());
+//        });
+//    }
+
+    public void blackAndWhiteToggle(ActionEvent actionEvent) {
+        System.out.println(colorChoice.getValue().toString());
+        makeBlackAndWhite(image,colorChoice.getValue().toString());
+    }
+
+    public void getRGB(MouseEvent mouseEvent) {
+        int x = new Double(mouseEvent.getX()).intValue();
+        int y = new Double(mouseEvent.getY()).intValue();
+        PixelReader r = mainImage.getImage().getPixelReader();
+        System.out.println(r.getColor(x,y).getRed()*255 + " " + r.getColor(x,y).getGreen()*255 + " " +r.getColor(x,y).getBlue()*255 + "\n" + r.getColor(x,y).getHue() + " "+r.getColor(x,y).getSaturation());
     }
 }
 
