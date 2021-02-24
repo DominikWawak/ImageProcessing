@@ -1,4 +1,4 @@
-package sample;
+package imgApp;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -22,6 +22,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+
+    DisjointSetNode<Integer> ds[];
 
     @FXML
     private Pane mainPane;
@@ -264,6 +267,7 @@ public class Controller implements Initializable {
 
                 Color og = pixelReader.getColor(x,y);
                 double valueOfColour = og.getRed()+og.getBlue()+og.getGreen();
+
                 Color borW;
                 switch (color) {
                     // FOR ORANGE
@@ -290,14 +294,61 @@ public class Controller implements Initializable {
         }
 
 
-
+        createDisjointSets(bwImage);
         return original;
+
     }
 
 
-//    public boolean interpretColour(Color cl){
-//
-//    }
+    public DisjointSetNode<Integer>[]  createDisjointSets(Image blackAndWhite) {
+        PixelReader pixelReader = blackAndWhite.getPixelReader();
+
+        int width = (int) blackAndWhite.getWidth();
+        int height = (int) blackAndWhite.getHeight();
+
+
+         ds = new DisjointSetNode[(int) (width * height)];
+        int i = 0;
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
+
+
+                    ds[i] = (pixelReader.getColor(y,x).equals(Color.color(0,0,0,1))) ? new DisjointSetNode<>(-1):new DisjointSetNode<>(i);
+                    ds[i].parent = ds[i];
+               // System.out.println(ds[i].data );
+                i++;
+
+            }
+        }
+        createSets(width,height);
+        return ds;
+    }
+
+    public void createSets(int width,int height){
+            System.out.println(width);
+
+        for(int i = 0;i<ds.length;i++){
+//            if(ds[i].data != -1 && ds[i+1].data!=-1 && ((i+1)%width)!=1 && (i/width>height-1)) {
+//                ds[i + 1].parent = ds[i];
+//                ds[i + width].parent = ds[i];
+//            }
+            if(i+width<width*height  && ds[i].data != -1) {
+                if ( ds[i + width].data != -1) {
+                    ds[i + width].parent = ds[i].parent;
+                     // System.out.println(ds[i].data+" " + ds[i+width].data + " " + ds[i+width].parent.data);
+                }
+                if( ds[i + 1].data != -1 && (i)%width != 0 ){
+                     ds[i + 1].parent = ds[i].parent;
+                }
+                //System.out.println(ds[i].data + " " + ds[i].parent.data );
+            }
+       }
+        for(int j=0;j<ds.length;j++) System.out.print(ds[j].parent.data+((j+1)%width==0 ? "\n" : " "));
+    }
+//    ((I+1)%WIDTH)==0
+//            (I/WIDTH)<HEIGHT
+//(i/WIDTH)<(HEIGHT-1)
+
 
     @FXML
     void applyResize(ActionEvent event) {
@@ -321,17 +372,8 @@ public class Controller implements Initializable {
 
     }
 
-//    public void showPixelDetail(MouseEvent mouseEvent) {
-//        mainImage.setOnMousePressed(e->	{
-//            Color c=mainImage.getImage().getPixelReader().getColor(mouseEvent.getX(), ((int) mouseEvent.getY()));
-//            System.out.println("\nHue: "+c.getHue());
-//            System.out.println("Saturation: "+c.getSaturation());
-//            System.out.println("Brightness: "+c.getBrightness());
-//        });
-//    }
-
     public void blackAndWhiteToggle(ActionEvent actionEvent) {
-        System.out.println(colorChoice.getValue().toString());
+
         makeBlackAndWhite(image,colorChoice.getValue().toString());
     }
 
