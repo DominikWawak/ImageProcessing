@@ -20,8 +20,8 @@
         <module name="jmhyets" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="jmhyets" target="1.5" />
+    <bytecodeTargetLevel target="8">
+      <module name="jmhyets" target="8" />
       <module name="Worksheet01_ImageProcessing" target="" />
     </bytecodeTargetLevel>
   </component>

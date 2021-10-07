@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgApp.Controller">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1230.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="newTabBtn" mnemonicParsing="false" onAction="#openNewTab" text="New" />
+                  <MenuItem fx:id="openFile" mnemonicParsing="false" onAction="#browse" text="Open" />
+                  <MenuItem fx:id="saveBTN" mnemonicParsing="false" text="save" />
+              <MenuItem fx:id="closeBTN" mnemonicParsing="false" onAction="#closeApp" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem fx:id="rgbChannels" mnemonicParsing="false" text="show RGB Channels" />
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="tabPane" layoutY="27.0" prefHeight="815.0" prefWidth="1230.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tab1" text="Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="995.0">
+                     <children>
+                        <ScrollPane layoutX="10.0" layoutY="15.0" prefHeight="767.0" prefWidth="985.0">
+                          <content>
+                            <AnchorPane fx:id="imagePane" minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="974.0">
+                                 <children>
+                                    <ImageView fx:id="mainImage" fitHeight="744.0" fitWidth="967.0" onMouseClicked="#getRGB" pickOnBounds="true" preserveRatio="true" />
+                                    <StackPane layoutX="2.0" layoutY="4.0" prefHeight="754.0" prefWidth="970.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                        <Separator layoutX="998.0" layoutY="1.0" orientation="VERTICAL" prefHeight="788.0" prefWidth="14.0" />
+                        <ToggleButton fx:id="grayScaleBTN" layoutX="1057.0" layoutY="374.0" mnemonicParsing="false" onAction="#toggleGrayScale" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: gray;" text="GrayScale" />
+                        <Slider fx:id="brightnessSlider" blockIncrement="0.01" layoutX="1047.0" layoutY="422.0" max="1.0" min="-1.0" />
+                        <Slider fx:id="hueSlider" blockIncrement="0.01" layoutX="1047.0" layoutY="471.0" max="1.0" min="-1.0" />
+                        <Slider fx:id="saturationSlider" blockIncrement="0.01" layoutX="1047.0" layoutY="524.0" max="1.0" min="-1.0" />
+                        <Label layoutX="1082.0" layoutY="399.0" text="Brightness" />
+                        <Label layoutX="1096.0" layoutY="447.0" text="HUE" />
+                        <Label layoutX="1084.0" layoutY="496.0" text="Saturation" />
+                        <Label fx:id="fname" layoutX="1047.0" layoutY="595.0" prefHeight="17.0" prefWidth="195.0" text="File Name" />
+                        <Label fx:id="fsize" layoutX="1050.0" layoutY="619.0" prefHeight="17.0" prefWidth="199.0" text="File Size" />
+                        <Label fx:id="fdimensions" layoutX="1048.0" layoutY="644.0" text="dimensions" />
+                        <Label layoutX="1090.0" layoutY="14.0" prefHeight="17.0" prefWidth="54.0" text="EDIT" />
+                        <Slider fx:id="zoomSlider" blockIncrement="1.0" layoutX="1010.0" layoutY="582.0" max="4.0" min="-4.0" orientation="VERTICAL" />
+                        <TextField fx:id="width" layoutX="1068.0" layoutY="683.0" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: skyblue;" />
+                        <TextField fx:id="height" layoutX="1133.0" layoutY="683.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: salmon;" />
+                        <Button fx:id="applyResizeBtn" layoutX="1071.0" layoutY="722.0" mnemonicParsing="false" onAction="#applyResize" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: lightgreen;" text="Apply" />
+                        <ToggleButton fx:id="blackAndWhite" layoutX="1058.0" layoutY="76.0" mnemonicParsing="false" onAction="#blackAndWhiteToggle" style="-fx-background-color: black;" text="Black and white" textFill="#fffafa" />
+                        <Label fx:id="hueLab" layoutX="1160.0" layoutY="496.0" text="Label" />
+                        <Label fx:id="satLab" layoutX="1160.0" layoutY="547.0" text="Label" />
+                        <ChoiceBox fx:id="colorChoice" layoutX="1057.0" layoutY="42.0" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: pink;" />
+                        <Button fx:id="processBtn" layoutX="1069.0" layoutY="285.0" mnemonicParsing="false" onAction="#processImage" prefHeight="25.0" prefWidth="100.0" text="process" />
+                        <Slider fx:id="outlierCounter" blockIncrement="1.0" layoutX="1042.0" layoutY="247.0" max="20.0" min="1.0" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                        <Label layoutX="1042.0" layoutY="213.0" text="Outlier Management ">
+                           <font>
+                              <Font name="Candara Light" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="numDisjointSets" layoutX="1005.0" layoutY="318.0" text="Number of Disjoint Sets: " />
+                        <Label layoutX="1008.0" layoutY="346.0" prefHeight="17.0" prefWidth="202.0" text="Cluster Count :" />
+                        <Label layoutX="1018.0" layoutY="151.0" prefHeight="21.0" prefWidth="203.0" text="DisjointSet Size Manager">
+                           <font>
+                              <Font name="Candara Light" size="17.0" />
+                           </font>
+                        </Label>
+                        <Slider fx:id="sizeManager" blockIncrement="1.0" layoutX="1042.0" layoutY="172.0" majorTickUnit="40.0" max="40.0" min="1.0" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                        <Button layoutX="1058.0" layoutY="115.0" mnemonicParsing="false" onAction="#colourInAll" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: red; -fx-border-color: green;" text="Colour In Sets" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Black and White">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="blackAndWhiteIMG" fitHeight="718.0" fitWidth="1150.0" layoutX="45.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="RGB-Colours">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="31.0" layoutY="16.0" prefHeight="420.0" prefWidth="720.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="16.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="359.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="402.0" minHeight="0.0" prefHeight="321.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ImageView fx:id="redImg" fitHeight="211.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="greenImg" fitHeight="212.0" fitWidth="358.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                              <ImageView fx:id="blueImg" fitHeight="207.0" fitWidth="361.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                              <ImageView fx:id="ogImg" fitHeight="209.0" fitWidth="361.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
